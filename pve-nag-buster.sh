@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # pve-nag-buster.sh (v03) https://github.com/foundObjects/pve-nag-buster
 # Copyright (C) 2019 /u/seaQueue (reddit.com/u/seaQueue)
@@ -25,7 +25,7 @@ SCRIPT="$(basename $0)"
 
 # disable license nag: https://johnscs.com/remove-proxmox51-subscription-notice/
 
-if $(grep -q "$NAGTOKEN" "$NAGFILE"); then
+if grep -qs "$NAGTOKEN" "$NAGFILE" > /dev/null 2>&1; then
   echo "$SCRIPT: Removing Nag ..."
   sed -i.orig "s/$NAGTOKEN/false/g" "$NAGFILE"
   systemctl restart pveproxy.service
